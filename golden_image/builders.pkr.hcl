@@ -1,7 +1,7 @@
 build {
   name = "rhel-aws"
   sources = [
-    "source.amazon-ebs.base",
+    "source.amazon-ebs.rhel",
   ]
 
   provisioner "shell" {
