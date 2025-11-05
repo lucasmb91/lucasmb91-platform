@@ -2,13 +2,10 @@ build {
   name = "rhel-aws"
   sources = [
     "source.amazon-ebs.rhel",
+    "source.azure-arm.rhel"
   ]
 
   provisioner "shell" {
-    inline = [
-      "touch /tmp/hello",
-      "sleep 30",
-      "ls /tmp/hello",
-    ]
+    inline = ["echo Running $(cat /etc/os-release | grep VERSION= | sed 's/\"//g' | sed 's/VERSION=//g')."]
   }
 }

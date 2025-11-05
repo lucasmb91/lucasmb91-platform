@@ -15,3 +15,21 @@ source "amazon-ebs" "rhel" {
 
   ssh_username = "ec2-user"
 }
+
+source "azure-arm" "rhel" {
+  client_id       = var.azure_client_id
+  client_secret   = var.azure_client_secret
+  tenant_id       = var.azure_tenant_id
+  subscription_id = var.azure_subscription_id
+
+  managed_image_name                = "rhel-10-${var.gitVersion}"
+  managed_image_resource_group_name = var.azure_resource_group
+  location                          = "East US"
+  vm_size                           = "Standard_B1s"
+
+  os_type         = "Linux"
+  image_publisher = "RedHat"
+  image_offer     = "RHEL"
+  image_sku       = "10-gen2"
+  image_version   = "latest"
+}
