@@ -24,7 +24,7 @@ source "azure-arm" "rhel" {
 
   subscription_id = var.armSubscriptionId
   tenant_id       = var.armTenantId
-  client_id       = var.AarmClientId
+  client_id       = var.armClientId
   client_secret   = var.armClientSecret
 
   os_type         = "Linux"
