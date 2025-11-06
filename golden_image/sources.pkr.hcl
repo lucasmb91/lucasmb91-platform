@@ -17,19 +17,18 @@ source "amazon-ebs" "rhel" {
 }
 
 source "azure-arm" "rhel" {
-  client_id       = var.azure_client_id
-  client_secret   = var.azure_client_secret
-  tenant_id       = var.azure_tenant_id
-  subscription_id = var.azure_subscription_id
-
   managed_image_name                = "rhel-10-${var.gitVersion}"
-  managed_image_resource_group_name = var.azure_resource_group
-  location                          = "East US"
+  managed_image_resource_group_name = var.ARM_RESOURCE_GROUP 
+  build_resource_group_name	    = var.ARM_RESOURCE_GROUP
   vm_size                           = "Standard_B1s"
+
+  subscription_id = var.ARM_SUBSCRIPTION_ID 
+  tenant_id       = var.ARM_TENANT_ID 
+  client_id       = var.ARM_CLIENT_ID 
+  client_secret   = var.ARM_CLIENT_SECRET 
 
   os_type         = "Linux"
   image_publisher = "RedHat"
   image_offer     = "RHEL"
-  image_sku       = "10-gen2"
-  image_version   = "latest"
+  image_sku       = "10-lvm-gen2"
 }
