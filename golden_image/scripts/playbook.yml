@@ -1,0 +1,47 @@
+---
+- name: Configure Golden Image
+  become: true
+  tasks:
+    - name: Create /app directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+        mode: '0755'
+
+    - name: Create usrapp group
+      ansible.builtin.group:
+        name: usrapp
+        state: present
+
+    - name: Create usrapp user
+      ansible.builtin.user:
+        name: usrapp
+        group: usrapp
+        state: present
+
+    - name: Set permissions for /app directory
+      ansible.builtin.file:
+        path: /app
+        owner: usrapp
+        group: usrapp
+        mode: '0770'
+        recurse: true
+
+    - name: Install Apache
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+    - name: Ensure Apache is running and enabled
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Copy index.html to /app
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/index.html"
+        dest: /app/index.html
+        owner: usrapp
+        group: usrapp
+        mode: '0644'

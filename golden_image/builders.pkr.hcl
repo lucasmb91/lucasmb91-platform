@@ -24,7 +24,7 @@ build {
   #Run ansible
   provisioner "ansible" {
     use_proxy               =  false
-    playbook_file           =  "scripts/install_apache.yaml"
+    playbook_file           =  "scripts/playbook.yml"
     ansible_env_vars        =  ["PACKER_BUILD_NAME={{ build_name }}"]
     inventory_file_template =  "{{ .HostAlias }} ansible_host={{ .ID }} ansible_user={{ .User }} ansible_ssh_common_args='-o StrictHostKeyChecking=no -o ProxyCommand=\"sh -c \\\"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters portNumber=%p\\\"\"'\n"
   }
